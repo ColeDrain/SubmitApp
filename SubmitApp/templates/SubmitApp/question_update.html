@@ -1,0 +1,16 @@
+{% extends 'SubmitApp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="py-0 text-center">
+        <img class="d-block mx-auto mb-1" src="{% static 'images/nb3.png' %}" alt="" width="72" height="72">
+        <h2>Question Edit</h2>
+        <p class="lead">Use this form to edit an already existing question or challenge for the students. The question should be a summary text/heading of the question.</p>
+    </div>
+    <form method="post" action="">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+{% endblock content %}

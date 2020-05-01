@@ -1,0 +1,10 @@
+.CodeMirror{
+    height: 200px;
+    min-height: 200px;
+}
+
+.myText{
+    background: linear-gradient(to right, #c2e59c, #64b364);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

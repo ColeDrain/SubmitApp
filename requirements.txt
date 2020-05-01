@@ -1,0 +1,6 @@
+Django
+django-bootstrap4
+Markdown
+Pillow
+social-auth-app-django
+python-decouple

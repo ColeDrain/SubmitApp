@@ -1,0 +1,53 @@
+{% extends 'SubmitApp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+    {% if question %}
+        {% if not question.is_deadline %}
+        <div class="py-0 text-center">
+            <img class="d-block mx-auto mb-1" src="{% static 'images/nb3.png' %}" alt="" width="72" height="72">
+            <h2>Submission form</h2>
+            <p class="lead">Use this form to submit your essays or images(for maths). You can type your essays in the text box or just paste it.</p>
+        </div>
+        <form method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-0">
+                    {% bootstrap_field form.question %}
+                </div>
+                <div class="col-md-6 mb-0">       
+                    {% if form.image %}
+                        {% bootstrap_field form.image %}
+                    {% endif %}
+                </div>
+            </div>
+            {% if form.solution_text %}
+                {% bootstrap_field form.solution_text placeholder="Type and edit or just paste your articles/essays here."%}
+            {% endif %}
+            <button type="submit" class="btn btn-info">Submit</button>
+        </form>
+        {% else %}
+        <div class="py-0 text-center">
+            <img class="d-block mx-auto mb-1" src="{% static 'images/nb3.png' %}" alt="" width="72" height="72">
+            <h2>Submission form</h2>
+            <p class="lead">This form has been closed, it is past deadline</p>
+        </div>
+        {% endif %}
+    {% else %}
+        <div class="py-0 text-center">
+            <img class="d-block mx-auto mb-1" src="{% static 'images/nb3.png' %}" alt="" width="72" height="72">
+            <h2>Ooops!!</h2>
+            <p class="lead">No question has been uploaded yet...</p>
+        </div>
+    {% endif %}
+{% endblock content %}
+
+
+{% block javascript %}
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({forceSync: true});
+    </script>
+{% endblock javascript %}
+    

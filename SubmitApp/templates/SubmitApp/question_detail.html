@@ -1,0 +1,56 @@
+{% extends 'SubmitApp/base.html' %}
+
+{% block content %}
+
+<div class="py-0 text-center">
+    <h1>{{question}}</h1>
+    <p class="lead">{{question.upload_date}}</p>
+
+    {% if user.is_staff %}
+        {% if qid == tid %}        
+        <a href="{% url 'question_update' question.id %}">
+            <button type="button" class="btn btn-success">
+            <span>Edit</span>
+            </button>
+        </a>
+        {% endif %}
+    {% endif %}
+
+    {% if not user.is_staff %}
+    <a href="{% url 'submit' %}">
+        <button type="button" class="btn btn-success">
+        <span>Click Here to Submit</span>
+        </button>
+    </a>
+    {% endif %}
+
+    {% if user.is_staff %}
+    <a href="{% url 'admin_page' %}">
+        <button type="button" class="btn btn-danger">
+        <span>Go To Admin Page</span>
+        </button>
+    </a>
+    {% endif %}
+    <p class="lead">Find submissions below.</p>
+</div>
+<div class="col-md-8 mx-auto">
+<ul class="list-group">
+{% for answer in page_obj %}
+    <li class="list-group-item">
+        {{forloop.counter0|add:page_obj.start_index}}.<!--
+    --><a href="#demo{{answer.id}}" data-toggle="collapse">
+            {{answer}} @{{answer.upload_time}}
+        </a>
+        <div id="demo{{answer.id}}" class="collapse text-break">
+            {{answer.get_text_as_markdown}}
+            <div class="col-md-4 px-0">
+                <img src="{{ answer.image.url }}" class="img-fluid" alt="image">
+            </div>
+        </div>
+    </li>
+{% endfor %}
+</ul>
+{% include 'include/pagination.html' %}
+</div>
+
+{% endblock %}

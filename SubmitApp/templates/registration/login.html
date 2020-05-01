@@ -1,0 +1,23 @@
+{% extends 'SubmitApp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}Sign in/up{% endblock %}
+
+{% block content %}
+  <div class="py-0 text-center">
+        <img class="d-block mx-auto mb-1" src="{% static 'images/nb3.png' %}" alt="" width="72" height="72">
+        <p class="lead">Welcome, to continue, you must log-in using your facebook account, to help us identify you...</p>
+  </div>
+  <div class="row justify-content-center">
+  <div class="col-lg-4 col-md-6 col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title text-center">Log-in</h3>
+        <a href="{% url 'social:begin' 'facebook' %}">
+          <img src="{% static 'images/fb.png' %}" class="img-fluid ">
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock content %}
